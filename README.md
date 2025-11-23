@@ -1,8 +1,8 @@
-# AnimeFlux 🎌
+# AnimeFlux
 
-A beautiful anime streaming mobile application built with React Native and Expo, featuring real-time data from AniList API.
+An anime streaming mobile application built with React Native and Expo, featuring real-time data from AniList API.
 
-## ✨ Features
+##Features
 
 - **User Authentication**: Secure login and registration with form validation
 - **Trending Anime**: Browse trending anime from AniList API
@@ -19,7 +19,7 @@ A beautiful anime streaming mobile application built with React Native and Expo,
 - **State Management**: Redux Toolkit for efficient state handling
 - **Data Persistence**: Secure storage for user sessions and AsyncStorage for favorites
 
-## 🛠️ Tech Stack
+##Tech Stack
 
 - **React Native** - Mobile framework
 - **Expo** - Development platform
@@ -33,11 +33,10 @@ A beautiful anime streaming mobile application built with React Native and Expo,
 - **Expo Linear Gradient** - Gradient backgrounds
 - **Feather Icons** - Icon library
 
-## 📱 Screenshots
+##Screenshots
 
-[Add your screenshots here]
 
-## 🚀 Getting Started
+##Getting Started
 
 ### Prerequisites
 
@@ -49,7 +48,7 @@ A beautiful anime streaming mobile application built with React Native and Expo,
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/AnimeFlux.git
+git clone https://github.com/ScorpJu-101/AnimeFlux.git
 cd AnimeFlux
 ```
 
@@ -65,83 +64,13 @@ npx expo start
 
 4. Scan the QR code with Expo Go app on your Android device
 
-## 📂 Project Structure
 
-```
-MediaFlux/
-├── src/
-│   ├── components/
-│   │   ├── CustomButton.js
-│   │   └── CustomInput.js
-│   ├── constants/
-│   │   └── theme.js
-│   ├── navigation/
-│   │   └── AppNavigator.js
-│   ├── screens/
-│   │   ├── LoginScreen.js
-│   │   ├── RegisterScreen.js
-│   │   ├── HomeScreen.js
-│   │   ├── DetailsScreen.js
-│   │   ├── FavoritesScreen.js
-│   │   ├── ProfileScreen.js
-│   │   └── EditProfileScreen.js
-│   ├── services/
-│   │   └── api.js
-│   ├── store/
-│   │   ├── authSlice.js
-│   │   ├── moviesSlice.js
-│   │   └── store.js
-│   └── utils/
-├── assets/
-├── App.js
-└── package.json
-```
-
-## 🎨 Key Features Details
-
-### Authentication
-- Secure login/registration flow
-- Form validation with Yup
-- Persistent sessions with Expo SecureStore
-- Auto-login on app restart
-
-### Anime Discovery
-- Real-time trending anime from AniList
-- Beautiful card-based grid layout
-- Ratings and episode information
-- Smooth navigation to details
-
-### Favorites Management
-- Add/remove favorites with heart icon
-- Persistent storage with AsyncStorage
-- Dedicated favorites screen
-- Real-time updates
-
-### User Profile
-- Account settings and statistics
-- Edit profile information
-- Logout functionality
-- Delete account option (demo)
-
-## 🌐 API Integration
+##API Integration
 
 This app uses the free **AniList GraphQL API** to fetch anime data. No API key is required!
 
 API Endpoint: `https://graphql.anilist.co`
 
-## 📝 License
-
-This project is open source and available under the MIT License.
-
-## 👨‍💻 Author
-
-Your Name
-
-## 🙏 Acknowledgments
-
-- AniList for the amazing free API
-- Expo team for the excellent development platform
-- React Native community
 
 ## 📧 Contact
 
