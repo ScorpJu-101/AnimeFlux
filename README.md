@@ -70,12 +70,3 @@ npx expo start
 This app uses the free **AniList GraphQL API** to fetch anime data. No API key is required!
 
 API Endpoint: `https://graphql.anilist.co`
-
-
-## 📧 Contact
-
-For questions or feedback, please reach out to [your-email@example.com]
-
----
-
-Made with ❤️ and React Native
