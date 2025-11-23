@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useSelector } from 'react-redux';
-import { COLORS, SPACING } from '../constants/theme';
+import { COLORS, SPACING, FONTS } from '../constants/theme';
 import { Feather } from '@expo/vector-icons';
 
 const WatchingScreen = ({ navigation }) => {
@@ -89,11 +89,12 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontFamily: FONTS.poppinsBold,
     color: COLORS.text,
   },
   count: {
     fontSize: 14,
+    fontFamily: FONTS.poppinsRegular,
     color: COLORS.textSecondary,
     marginTop: SPACING.xs,
   },
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: FONTS.poppinsSemiBold,
     color: COLORS.text,
     marginBottom: SPACING.s,
   },
@@ -159,13 +160,14 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: FONTS.poppinsBold,
     color: COLORS.text,
     marginTop: SPACING.l,
     textAlign: 'center',
   },
   emptySubText: {
     fontSize: 14,
+    fontFamily: FONTS.poppinsRegular,
     color: COLORS.textSecondary,
     marginTop: SPACING.s,
     textAlign: 'center',

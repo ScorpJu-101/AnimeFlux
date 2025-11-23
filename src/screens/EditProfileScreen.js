@@ -9,7 +9,7 @@ import { Feather } from '@expo/vector-icons';
 import { loginSuccess } from '../store/authSlice';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
-import { COLORS, SPACING } from '../constants/theme';
+import { COLORS, SPACING, FONTS } from '../constants/theme';
 
 const EditProfileSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),

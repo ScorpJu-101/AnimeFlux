@@ -18,6 +18,17 @@ export const COLORS = {
   green: '#2ECC71',
 };
 
+export const FONTS = {
+  fredokaRegular: 'Fredoka_400Regular',
+  fredokaMedium: 'Fredoka_500Medium',
+  fredokaSemiBold: 'Fredoka_600SemiBold',
+  fredokaBold: 'Fredoka_700Bold',
+  poppinsRegular: 'Poppins_400Regular',
+  poppinsMedium: 'Poppins_500Medium',
+  poppinsSemiBold: 'Poppins_600SemiBold',
+  poppinsBold: 'Poppins_700Bold',
+};
+
 export const SPACING = {
   xs: 4,
   s: 8,

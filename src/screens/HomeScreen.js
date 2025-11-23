@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTrendingAnime } from '../services/api';
-import { COLORS, SPACING } from '../constants/theme';
+import { COLORS, SPACING, FONTS } from '../constants/theme';
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -76,9 +76,6 @@ const HomeScreen = ({ navigation }) => {
           <Text style={styles.greeting}>Hello, {user?.name || 'Otaku'} 🎌</Text>
           <Text style={styles.subtitle}>Discover trending anime</Text>
         </View>
-        <TouchableOpacity style={styles.profileButton}>
-           <Feather name="user" size={24} color={COLORS.primary} />
-        </TouchableOpacity>
       </View>
 
       <FlatList
@@ -114,9 +111,6 @@ const styles = StyleSheet.create({
   header: {
     padding: SPACING.l,
     paddingTop: SPACING.xl + 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     backgroundColor: COLORS.primary,
     elevation: 4,
     shadowColor: '#000',
@@ -126,18 +120,14 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: FONTS.poppinsBold,
     color: COLORS.white,
   },
   subtitle: {
     fontSize: 14,
+    fontFamily: FONTS.poppinsRegular,
     color: COLORS.white,
     opacity: 0.9,
-  },
-  profileButton: {
-    padding: SPACING.s,
-    backgroundColor: COLORS.white,
-    borderRadius: 20,
   },
   listContent: {
     padding: SPACING.s,

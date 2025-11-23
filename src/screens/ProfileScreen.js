@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Feather } from '@expo/vector-icons';
 import { logout } from '../store/authSlice';
-import { COLORS, SPACING } from '../constants/theme';
+import { COLORS, SPACING, FONTS } from '../constants/theme';
 
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();

@@ -62,7 +62,10 @@ const DetailsScreen = ({ route, navigation }) => {
           style={styles.banner}
           resizeMode="cover"
         />
-        <View style={styles.bannerOverlay} />
+        <LinearGradient
+          colors={['transparent', COLORS.background]}
+          style={styles.bannerOverlay}
+        />
       </View>
       
       <View style={styles.detailsContainer}>
@@ -226,9 +229,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 100,
-    backgroundColor: COLORS.background,
-    opacity: 0.8,
+    height: 150,
   },
   detailsContainer: {
     padding: SPACING.m,

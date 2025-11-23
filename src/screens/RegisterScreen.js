@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
@@ -9,7 +9,8 @@ import { loginSuccess } from '../store/authSlice';
 import { registerUser } from '../services/api';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
-import { COLORS, SPACING } from '../constants/theme';
+import CustomSplashScreen from '../components/CustomSplashScreen';
+import { COLORS, SPACING, FONTS } from '../constants/theme';
 import { Feather } from '@expo/vector-icons';
 
 const RegisterSchema = Yup.object().shape({
@@ -23,22 +24,34 @@ const RegisterSchema = Yup.object().shape({
 
 const RegisterScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  const [showSplash, setShowSplash] = useState(false);
 
   const handleRegister = async (values, { setSubmitting, setErrors }) => {
     try {
+      setShowSplash(true);
+      
       const userData = await registerUser(values.name, values.email, values.password);
+      
+      // Show splash screen for at least 2 seconds
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
       // Persist user session
       await SecureStore.setItemAsync('userSession', JSON.stringify(userData));
       
       // Log the user in automatically
       dispatch(loginSuccess(userData));
+      setShowSplash(false);
     } catch (error) {
+      setShowSplash(false);
       setErrors({ submit: error.message });
     } finally {
       setSubmitting(false);
     }
   };
+
+  if (showSplash) {
+    return <CustomSplashScreen />;
+  }
 
   return (
     <View style={styles.container}>
@@ -154,15 +167,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: COLORS.white,
+    fontFamily: FONTS.poppinsBold,
+    color: COLORS.primary,
     marginBottom: SPACING.s,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    color: COLORS.white,
-    opacity: 0.9,
+    fontFamily: FONTS.poppinsRegular,
+    color: COLORS.secondary,
     textAlign: 'center',
   },
   formCard: {

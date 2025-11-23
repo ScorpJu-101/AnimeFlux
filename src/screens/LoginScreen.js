@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
@@ -9,7 +9,8 @@ import { loginSuccess } from '../store/authSlice';
 import { loginUser } from '../services/api';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
-import { COLORS, SPACING } from '../constants/theme';
+import CustomSplashScreen from '../components/CustomSplashScreen';
+import { COLORS, SPACING, FONTS } from '../constants/theme';
 import { Feather } from '@expo/vector-icons';
 
 const LoginSchema = Yup.object().shape({
@@ -19,21 +20,33 @@ const LoginSchema = Yup.object().shape({
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  const [showSplash, setShowSplash] = useState(false);
 
   const handleLogin = async (values, { setSubmitting, setErrors }) => {
     try {
+      setShowSplash(true);
+      
       const userData = await loginUser(values.email, values.password);
+      
+      // Show splash screen for at least 2 seconds
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
       // Persist user session
       await SecureStore.setItemAsync('userSession', JSON.stringify(userData));
       
       dispatch(loginSuccess(userData));
+      setShowSplash(false);
     } catch (error) {
+      setShowSplash(false);
       setErrors({ submit: error.message });
     } finally {
       setSubmitting(false);
     }
   };
+
+  if (showSplash) {
+    return <CustomSplashScreen />;
+  }
 
   return (
     <View style={styles.container}>
@@ -130,13 +143,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontFamily: FONTS.poppinsBold,
     color: COLORS.primary,
     marginBottom: SPACING.s,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
+    fontFamily: FONTS.poppinsRegular,
     color: COLORS.textSecondary,
     textAlign: 'center',
   },
