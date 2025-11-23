@@ -132,7 +132,7 @@ const DetailsScreen = ({ route, navigation }) => {
             </View>
           )}
           {anime.status && (
-            <View style={[styles.badge, styles.statusBadge]}>
+            <View style={styles.animeStatusBadge}>
               <Text style={styles.statusText}>{anime.status}</Text>
             </View>
           )}
@@ -286,9 +286,9 @@ const styles = StyleSheet.create({
   statusBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: SPACING.m,
-    paddingVertical: SPACING.xs,
-    borderRadius: 16,
+    paddingHorizontal: SPACING.m + 4,
+    paddingVertical: SPACING.s,
+    borderRadius: 50,
     gap: SPACING.xs,
   },
   statusBadgeText: {
@@ -311,9 +311,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     elevation: 2,
   },
-  statusBadge: {
-    backgroundColor: COLORS.green,
-  },
   metaText: {
     marginLeft: SPACING.xs,
     color: COLORS.text,
@@ -324,6 +321,15 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 12,
     fontWeight: 'bold',
+  },
+  animeStatusBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.green,
+    paddingHorizontal: SPACING.m,
+    paddingVertical: SPACING.xs,
+    borderRadius: 50,
+    elevation: 2,
   },
   genresSection: {
     marginBottom: SPACING.m,
