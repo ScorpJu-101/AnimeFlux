@@ -30,6 +30,33 @@ query {
 }
 `;
 
+// GraphQL query for searching anime
+const SEARCH_ANIME_QUERY = `
+query ($search: String) {
+  Page(page: 1, perPage: 20) {
+    media(type: ANIME, search: $search, sort: POPULARITY_DESC) {
+      id
+      title {
+        romaji
+        english
+      }
+      coverImage {
+        large
+        extraLarge
+      }
+      bannerImage
+      description
+      averageScore
+      episodes
+      genres
+      seasonYear
+      status
+      format
+    }
+  }
+}
+`;
+
 // Transform AniList data to our app format
 const transformAnimeData = (animeList) => {
   return animeList.map(anime => ({
@@ -58,6 +85,23 @@ export const fetchTrendingAnime = async () => {
   } catch (error) {
     console.error('Error fetching anime:', error);
     // Fallback to empty array on error
+    return [];
+  }
+};
+
+export const searchAnime = async (searchQuery) => {
+  try {
+    const response = await axios.post(ANILIST_API, {
+      query: SEARCH_ANIME_QUERY,
+      variables: {
+        search: searchQuery,
+      },
+    });
+    
+    const animeList = response.data.data.Page.media;
+    return transformAnimeData(animeList);
+  } catch (error) {
+    console.error('Error searching anime:', error);
     return [];
   }
 };

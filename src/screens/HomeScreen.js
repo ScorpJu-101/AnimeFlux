@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, ActivityIndicator, TextInput } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchTrendingAnime } from '../services/api';
+import { fetchTrendingAnime, searchAnime } from '../services/api';
 import { COLORS, SPACING, FONTS } from '../constants/theme';
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -9,6 +9,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 const HomeScreen = ({ navigation }) => {
   const [anime, setAnime] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
@@ -16,8 +18,23 @@ const HomeScreen = ({ navigation }) => {
     loadAnime();
   }, []);
 
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setIsSearching(false);
+      loadAnime();
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      performSearch(searchQuery);
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchQuery]);
+
   const loadAnime = async () => {
     try {
+      setLoading(true);
       const data = await fetchTrendingAnime();
       setAnime(data);
     } catch (error) {
@@ -25,6 +42,24 @@ const HomeScreen = ({ navigation }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const performSearch = async (query) => {
+    try {
+      setIsSearching(true);
+      setLoading(true);
+      const data = await searchAnime(query);
+      setAnime(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchQuery('');
+    setIsSearching(false);
   };
 
   const renderItem = ({ item }) => (
@@ -74,7 +109,27 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.header}>
         <View>
           <Text style={styles.greeting}>Hello, {user?.name || 'Otaku'} 🎌</Text>
-          <Text style={styles.subtitle}>Discover trending anime</Text>
+          <Text style={styles.subtitle}>
+            {isSearching ? 'Search results' : 'Discover trending anime'}
+          </Text>
+        </View>
+      </View>
+
+      <View style={styles.searchContainer}>
+        <View style={styles.searchBar}>
+          <Feather name="search" size={20} color={COLORS.textSecondary} style={styles.searchIcon} />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search anime..."
+            placeholderTextColor={COLORS.textSecondary}
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
+          {searchQuery.length > 0 && (
+            <TouchableOpacity onPress={clearSearch} style={styles.clearButton}>
+              <Feather name="x" size={20} color={COLORS.textSecondary} />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
 
@@ -128,6 +183,36 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.poppinsRegular,
     color: COLORS.white,
     opacity: 0.9,
+  },
+  searchContainer: {
+    paddingHorizontal: SPACING.l,
+    paddingVertical: SPACING.m,
+    backgroundColor: COLORS.background,
+  },
+  searchBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.surface,
+    borderRadius: 12,
+    paddingHorizontal: SPACING.m,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+  },
+  searchIcon: {
+    marginRight: SPACING.s,
+  },
+  searchInput: {
+    flex: 1,
+    height: 48,
+    fontSize: 15,
+    fontFamily: FONTS.poppinsRegular,
+    color: COLORS.text,
+  },
+  clearButton: {
+    padding: SPACING.s,
   },
   listContent: {
     padding: SPACING.s,
