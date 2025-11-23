@@ -1,20 +1,78 @@
+import React, { useEffect, useCallback, useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { Provider, useDispatch } from 'react-redux';
+import * as SplashScreen from 'expo-splash-screen';
+import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { store } from './src/store/store';
+import { restoreToken } from './src/store/authSlice';
+import { setFavorites } from './src/store/moviesSlice';
+import AppNavigator from './src/navigation/AppNavigator';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
+
+const AppContent = () => {
+  const dispatch = useDispatch();
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // Restore user session
+        const userSession = await SecureStore.getItemAsync('userSession');
+        if (userSession) {
+          dispatch(restoreToken(JSON.parse(userSession)));
+        }
+
+        // Restore favorites
+        const favorites = await AsyncStorage.getItem('favorites');
+        if (favorites) {
+          dispatch(setFavorites(JSON.parse(favorites)));
+        }
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        // Tell the application to render
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, [dispatch]);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
+  return (
+    <View style={styles.container} onLayout={onLayoutRootView}>
+      <NavigationContainer>
+        <AppNavigator />
+        <StatusBar style="auto" />
+      </NavigationContainer>
+    </View>
+  );
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <AppContent />
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

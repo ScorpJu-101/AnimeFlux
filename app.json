@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MediaFlux",
-    "slug": "MediaFlux",
+    "name": "AnimeFlux",
+    "slug": "AnimeFlux",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FF6B9D"
     },
     "ios": {
       "supportsTablet": true
@@ -24,6 +24,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }
