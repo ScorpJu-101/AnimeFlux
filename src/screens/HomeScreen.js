@@ -71,20 +71,15 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={[COLORS.primary, COLORS.accent2]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        style={styles.header}
-      >
+      <View style={styles.header}>
         <View>
           <Text style={styles.greeting}>Hello, {user?.name || 'Otaku'} 🎌</Text>
           <Text style={styles.subtitle}>Discover trending anime</Text>
         </View>
         <TouchableOpacity style={styles.profileButton}>
-           <Feather name="user" size={24} color={COLORS.white} />
+           <Feather name="user" size={24} color={COLORS.primary} />
         </TouchableOpacity>
-      </LinearGradient>
+      </View>
 
       <FlatList
         data={anime}
@@ -122,6 +117,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: COLORS.primary,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -140,7 +136,7 @@ const styles = StyleSheet.create({
   },
   profileButton: {
     padding: SPACING.s,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: COLORS.white,
     borderRadius: 20,
   },
   listContent: {

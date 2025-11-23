@@ -32,12 +32,7 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={[COLORS.primary, COLORS.accent2]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        style={styles.header}
-      >
+      <View style={styles.header}>
         <View style={styles.avatarContainer}>
           <View style={styles.avatar}>
             <Feather name="user" size={60} color={COLORS.white} />
@@ -45,7 +40,7 @@ const ProfileScreen = ({ navigation }) => {
         </View>
         <Text style={styles.name}>{user?.name || 'User'}</Text>
         <Text style={styles.email}>{user?.email || 'user@example.com'}</Text>
-      </LinearGradient>
+      </View>
 
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         {/* Stats Card */}
@@ -174,6 +169,7 @@ const styles = StyleSheet.create({
     paddingTop: SPACING.xl + 20,
     paddingBottom: SPACING.xl,
     alignItems: 'center',
+    backgroundColor: COLORS.primary,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

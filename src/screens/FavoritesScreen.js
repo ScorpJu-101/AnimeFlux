@@ -38,14 +38,11 @@ const FavoritesScreen = ({ navigation }) => {
 
   if (favorites.length === 0) {
     return (
-      <LinearGradient
-        colors={[COLORS.background, COLORS.surface]}
-        style={styles.emptyContainer}
-      >
+      <View style={styles.emptyContainer}>
         <Feather name="heart" size={80} color={COLORS.primary} />
         <Text style={styles.emptyText}>No favorites yet</Text>
         <Text style={styles.emptySubText}>Start adding anime to your favorites! 🎌</Text>
-      </LinearGradient>
+      </View>
     );
   }
 
@@ -71,6 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: SPACING.xl,
+    backgroundColor: COLORS.background,
   },
   emptyText: {
     fontSize: 24,

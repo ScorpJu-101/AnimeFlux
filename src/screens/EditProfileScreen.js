@@ -51,12 +51,7 @@ const EditProfileScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={[COLORS.primary, COLORS.accent2]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        style={styles.header}
-      >
+      <View style={styles.header}>
         <TouchableOpacity 
           style={styles.backButton}
           onPress={() => navigation.goBack()}
@@ -65,7 +60,7 @@ const EditProfileScreen = ({ navigation }) => {
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Edit Profile</Text>
         <View style={styles.placeholder} />
-      </LinearGradient>
+      </View>
 
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         {/* Avatar Section */}
@@ -180,6 +175,7 @@ const styles = StyleSheet.create({
     paddingTop: SPACING.xl + 20,
     paddingBottom: SPACING.m,
     paddingHorizontal: SPACING.m,
+    backgroundColor: COLORS.primary,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

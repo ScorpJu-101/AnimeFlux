@@ -36,11 +36,8 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <LinearGradient
-      colors={[COLORS.primary, COLORS.accent2]}
-      style={styles.gradient}
-    >
-      <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.keyboardView}
@@ -48,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
           <ScrollView contentContainerStyle={styles.scrollContent}>
             <View style={styles.header}>
               <View style={styles.iconContainer}>
-                <Feather name="tv" size={60} color={COLORS.white} />
+                <Feather name="tv" size={60} color={COLORS.primary} />
               </View>
               <Text style={styles.title}>Welcome to AnimeFlux</Text>
               <Text style={styles.subtitle}>Sign in to discover amazing anime 🎌</Text>
@@ -104,15 +101,16 @@ const LoginScreen = ({ navigation }) => {
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  gradient: {
-    flex: 1,
-  },
   container: {
+    flex: 1,
+    backgroundColor: COLORS.background,
+  },
+  safeArea: {
     flex: 1,
   },
   keyboardView: {
@@ -133,14 +131,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: COLORS.white,
+    color: COLORS.primary,
     marginBottom: SPACING.s,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    color: COLORS.white,
-    opacity: 0.9,
+    color: COLORS.textSecondary,
     textAlign: 'center',
   },
   formCard: {

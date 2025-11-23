@@ -41,11 +41,8 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <LinearGradient
-      colors={[COLORS.accent, COLORS.secondary]}
-      style={styles.gradient}
-    >
-      <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.keyboardView}
@@ -53,7 +50,7 @@ const RegisterScreen = ({ navigation }) => {
           <ScrollView contentContainerStyle={styles.scrollContent}>
             <View style={styles.header}>
               <View style={styles.iconContainer}>
-                <Feather name="user-plus" size={60} color={COLORS.white} />
+                <Feather name="user-plus" size={60} color={COLORS.primary} />
               </View>
               <Text style={styles.title}>Create Account</Text>
               <Text style={styles.subtitle}>Join the anime community! 🎌</Text>
@@ -128,15 +125,16 @@ const RegisterScreen = ({ navigation }) => {
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  gradient: {
-    flex: 1,
-  },
   container: {
+    flex: 1,
+    backgroundColor: COLORS.background,
+  },
+  safeArea: {
     flex: 1,
   },
   keyboardView: {
