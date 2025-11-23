@@ -10,6 +10,8 @@ const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const favorites = useSelector((state) => state.anime.favorites);
+  const watching = useSelector((state) => state.anime.watching);
+  const completed = useSelector((state) => state.anime.completed);
 
   const handleLogout = () => {
     Alert.alert(
@@ -53,13 +55,13 @@ const ProfileScreen = ({ navigation }) => {
           <View style={styles.divider} />
           <View style={styles.statItem}>
             <Feather name="tv" size={24} color={COLORS.blue} />
-            <Text style={styles.statNumber}>0</Text>
+            <Text style={styles.statNumber}>{watching.length}</Text>
             <Text style={styles.statLabel}>Watching</Text>
           </View>
           <View style={styles.divider} />
           <View style={styles.statItem}>
             <Feather name="check-circle" size={24} color={COLORS.green} />
-            <Text style={styles.statNumber}>0</Text>
+            <Text style={styles.statNumber}>{completed.length}</Text>
             <Text style={styles.statLabel}>Completed</Text>
           </View>
         </View>

@@ -10,6 +10,8 @@ import RegisterScreen from '../screens/RegisterScreen';
 import HomeScreen from '../screens/HomeScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import WatchingScreen from '../screens/WatchingScreen';
+import CompletedScreen from '../screens/CompletedScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
 
@@ -26,6 +28,20 @@ const HomeStack = () => (
 const FavoritesStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="FavoritesList" component={FavoritesScreen} options={{ title: 'My Favorites', headerShown: true, headerStyle: { backgroundColor: COLORS.primary }, headerTintColor: COLORS.white }} />
+    <Stack.Screen name="Details" component={DetailsScreen} options={{ headerShown: true, title: 'Anime Details', headerStyle: { backgroundColor: COLORS.primary }, headerTintColor: COLORS.white }} />
+  </Stack.Navigator>
+);
+
+const WatchingStack = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="WatchingList" component={WatchingScreen} options={{ title: 'Watching', headerShown: true, headerStyle: { backgroundColor: COLORS.primary }, headerTintColor: COLORS.white }} />
+    <Stack.Screen name="Details" component={DetailsScreen} options={{ headerShown: true, title: 'Anime Details', headerStyle: { backgroundColor: COLORS.primary }, headerTintColor: COLORS.white }} />
+  </Stack.Navigator>
+);
+
+const CompletedStack = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="CompletedList" component={CompletedScreen} options={{ title: 'Completed', headerShown: true, headerStyle: { backgroundColor: COLORS.primary }, headerTintColor: COLORS.white }} />
     <Stack.Screen name="Details" component={DetailsScreen} options={{ headerShown: true, title: 'Anime Details', headerStyle: { backgroundColor: COLORS.primary }, headerTintColor: COLORS.white }} />
   </Stack.Navigator>
 );
@@ -47,6 +63,10 @@ const AppTabs = () => (
           iconName = 'home';
         } else if (route.name === 'Favorites') {
           iconName = 'heart';
+        } else if (route.name === 'Watching') {
+          iconName = 'tv';
+        } else if (route.name === 'Completed') {
+          iconName = 'check-circle';
         } else if (route.name === 'Profile') {
           iconName = 'user';
         }
@@ -56,9 +76,18 @@ const AppTabs = () => (
       tabBarActiveTintColor: COLORS.primary,
       tabBarInactiveTintColor: COLORS.textSecondary,
       headerShown: false,
+      tabBarStyle: {
+        paddingBottom: 5,
+        height: 60,
+      },
+      tabBarLabelStyle: {
+        fontSize: 11,
+      },
     })}
   >
     <Tab.Screen name="Home" component={HomeStack} />
+    <Tab.Screen name="Watching" component={WatchingStack} />
+    <Tab.Screen name="Completed" component={CompletedStack} />
     <Tab.Screen name="Favorites" component={FavoritesStack} />
     <Tab.Screen name="Profile" component={ProfileStack} />
   </Tab.Navigator>

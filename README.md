@@ -36,6 +36,7 @@ An anime streaming mobile application built with React Native and Expo, featurin
 ##Screenshots
 
 
+
 ##Getting Started
 
 ### Prerequisites
@@ -63,7 +64,6 @@ npx expo start
 ```
 
 4. Scan the QR code with Expo Go app on your Android device
-
 
 ##API Integration
 

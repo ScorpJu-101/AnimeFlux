@@ -7,7 +7,7 @@ import * as SecureStore from 'expo-secure-store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { store } from './src/store/store';
 import { restoreToken } from './src/store/authSlice';
-import { setFavorites } from './src/store/moviesSlice';
+import { setFavorites, setWatching, setCompleted } from './src/store/moviesSlice';
 import AppNavigator from './src/navigation/AppNavigator';
 import { StatusBar } from 'expo-status-bar';
 
@@ -31,6 +31,18 @@ const AppContent = () => {
         const favorites = await AsyncStorage.getItem('favorites');
         if (favorites) {
           dispatch(setFavorites(JSON.parse(favorites)));
+        }
+
+        // Restore watching list
+        const watching = await AsyncStorage.getItem('watching');
+        if (watching) {
+          dispatch(setWatching(JSON.parse(watching)));
+        }
+
+        // Restore completed list
+        const completed = await AsyncStorage.getItem('completed');
+        if (completed) {
+          dispatch(setCompleted(JSON.parse(completed)));
         }
       } catch (e) {
         console.warn(e);
